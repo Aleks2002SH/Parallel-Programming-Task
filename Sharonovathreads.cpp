@@ -287,11 +287,12 @@ void f(mutex& m, ifstream& in, int pos, int& count, queue<string>& q) {
 	while (in.peek() != EOF) {
 		vector<int> V;
 		m.lock();
+		long int position = in.tellg();
 		int cnt = read_from(in, count, V, pos, q);
 		cout << "Thread " << this_thread::get_id() << endl;
 		cout << cnt << endl;
 		m.unlock();
-		string filename = to_string(pos);
+		string filename = to_string(position);
 		if (cnt != 0) {
 			ofstream out(filename, ios::binary);
 			q.push(filename);
